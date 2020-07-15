@@ -1,4 +1,4 @@
-import Router, { request, response } from 'express';
+import Router from 'express';
 import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 import AppointmetsRepository from '../repositories/AppointmetsRepository';
@@ -32,17 +32,15 @@ appontmentsRouter.post('/', async (request, response) => {
   }
 });
 
-appontmentsRouter.delete('/:id', async (request, response)=>{
+appontmentsRouter.delete('/:id', async (request, response) => {
   try {
-    const { id } = request.params
+    const { id } = request.params;
     const appointmentsRepository = getCustomRepository(AppointmetsRepository);
-    const appointments = await appointmentsRepository.delete(id)
+    const appointments = await appointmentsRepository.delete(id);
     return response.status(204).json(appointments);
   } catch (error) {
-    return response.status(400).json({message: 'Not found deleted'})
+    return response.status(400).json({ message: 'Not found deleted' });
   }
-
-  
-})
+});
 
 export default appontmentsRouter;
