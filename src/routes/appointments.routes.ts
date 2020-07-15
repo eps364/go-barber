@@ -1,29 +1,27 @@
-import Router from 'express';
+import Router, { request, response } from 'express';
+import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 import AppointmetsRepository from '../repositories/AppointmetsRepository';
 import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appontmentsRouter = Router();
-const appointmentsRepository = new AppointmetsRepository();
 
-// Rotas
+appontmentsRouter.get('/', async (request, response) => {
+  const appointmentsRepository = getCustomRepository(AppointmetsRepository);
+  const appointments = await appointmentsRepository.find();
 
-appontmentsRouter.get('/', (request, response) => {
-  const appointments = appointmentsRepository.all();
   return response.json(appointments);
 });
 
-appontmentsRouter.post('/', (request, response) => {
+appontmentsRouter.post('/', async (request, response) => {
   try {
     const { provider, date } = request.body;
 
     const parseDate = parseISO(date);
 
-    const createAppointment = new CreateAppointmentService(
-      appointmentsRepository,
-    );
+    const createAppointment = new CreateAppointmentService();
 
-    const appointment = createAppointment.execute({
+    const appointment = await createAppointment.execute({
       date: parseDate,
       provider,
     });
@@ -33,5 +31,18 @@ appontmentsRouter.post('/', (request, response) => {
     return response.status(400).json({ error: err.message });
   }
 });
+
+appontmentsRouter.delete('/:id', async (request, response)=>{
+  try {
+    const { id } = request.params
+    const appointmentsRepository = getCustomRepository(AppointmetsRepository);
+    const appointments = await appointmentsRepository.delete(id)
+    return response.status(204).json(appointments);
+  } catch (error) {
+    return response.status(400).json({message: 'Not found deleted'})
+  }
+
+  
+})
 
 export default appontmentsRouter;

@@ -1,16 +1,14 @@
-import { uuid } from 'uuidv4';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+@Entity('appointments')
 class Appointments {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   provider: string;
 
+  @Column('timestamp with time zone')
   date: Date;
-
-  constructor(provider: string, date: Date) {
-    this.id = uuid();
-    this.provider = provider;
-    this.date = date;
-  }
 }
 export default Appointments;
