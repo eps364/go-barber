@@ -1,5 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import authConfig from '../config/config';
 import UsersRepository from '../repositories/UsersRepository';
 import User from '../models/User';
 
@@ -10,6 +12,7 @@ interface Request {
 
 interface Response {
   user: User;
+  token: string;
 }
 
 class AuthenticatiteUserService {
@@ -25,9 +28,15 @@ class AuthenticatiteUserService {
 
     if (!passwordMatched)
       throw new Error('Incorrect email/password combination.');
-
     delete user.password;
-    return { user };
+
+    const { secret, expiresIn } = authConfig.jwt;
+    const token = sign({}, secret, {
+      subject: user.id,
+      expiresIn,
+    });
+
+    return { user, token };
   }
 }
 export default AuthenticatiteUserService;
