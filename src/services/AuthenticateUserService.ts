@@ -5,6 +5,8 @@ import authConfig from '../config/config';
 import UsersRepository from '../repositories/UsersRepository';
 import User from '../models/User';
 
+import AppError from '../errors/AppError';
+
 interface Request {
   email: string;
   password: string;
@@ -22,12 +24,12 @@ class AuthenticatiteUserService {
       where: { email },
     });
 
-    if (!user) throw new Error('Incorrect email/password combination.');
+    if (!user) throw new AppError('Incorrect email/password combination.', 401);
 
     const passwordMatched = compare(password, user.password);
 
     if (!passwordMatched)
-      throw new Error('Incorrect email/password combination.');
+      throw new AppError('Incorrect email/password combination.', 401);
     delete user.password;
 
     const { secret, expiresIn } = authConfig.jwt;

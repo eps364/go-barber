@@ -14,33 +14,25 @@ appontmentsRouter.get('/', async (request, response) => {
 });
 
 appontmentsRouter.post('/', async (request, response) => {
-  try {
-    const { provider_id, date } = request.body;
+  const { provider_id, date } = request.body;
 
-    const parseDate = parseISO(date);
+  const parseDate = parseISO(date);
 
-    const createAppointment = new CreateAppointmentService();
+  const createAppointment = new CreateAppointmentService();
 
-    const appointment = await createAppointment.execute({
-      date: parseDate,
-      provider_id,
-    });
+  const appointment = await createAppointment.execute({
+    date: parseDate,
+    provider_id,
+  });
 
-    return response.json(appointment);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(appointment);
 });
 
 appontmentsRouter.delete('/:id', async (request, response) => {
-  try {
-    const { id } = request.params;
-    const appointmentsRepository = getCustomRepository(AppointmetsRepository);
-    const appointments = await appointmentsRepository.delete(id);
-    return response.status(204).json(appointments);
-  } catch (error) {
-    return response.status(400).json({ message: 'Not found deleted' });
-  }
+  const { id } = request.params;
+  const appointmentsRepository = getCustomRepository(AppointmetsRepository);
+  const appointments = await appointmentsRepository.delete(id);
+  return response.status(204).json(appointments);
 });
 
 export default appontmentsRouter;
