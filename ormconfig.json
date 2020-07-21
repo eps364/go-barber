@@ -1,4 +1,5 @@
 {
+  "name": "default",
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
@@ -6,12 +7,12 @@
   "password": "1234",
   "database": "gobarber",
   "entities": [
-    "./src/modules/**/infra/typeorm/entities/*.ts"
+    "./dist/modules/**/infra/typeorm/entities/*.js"
   ],
-  "migrations":[
-    "./src/shared/infra/typeorm/migrations/*.js"
+  "migrations": [
+    "./dist/shared/infra/typeorm/migrations/*.js"
   ],
-  "cli":{
-    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  "cli": {
+    "migrationsDir": "./dist/shared/infra/typeorm/migrations"
   }
 }
