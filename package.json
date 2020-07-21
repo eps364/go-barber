@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "eslint --fix ./src/. --ext .ts",
-    "start": "ts-node dist/shared/infra/http/server.ts",
+    "start": "ts-node dist/shared/infra/http/server.js",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files ",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --transpile-only --inspect --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
