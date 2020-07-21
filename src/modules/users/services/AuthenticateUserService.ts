@@ -11,7 +11,9 @@ import AppError from '@shared/errors/AppError';
 
 @injectable()
 class AuthenticatiteUserService {
-  constructor(@inject("UsersRepository") private userReppository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository') private userReppository: IUsersRepository,
+  ) {}
 
   public async execute({
     email,

@@ -13,7 +13,9 @@ interface IRequest {
 }
 @injectable()
 class CreateUserService {
-  constructor(@inject("UsersRepository") private userRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository') private userRepository: IUsersRepository,
+  ) {}
 
   public async execute({ name, email, password }: IRequest): Promise<User> {
     const checkUserExists = await this.userRepository.findByEmail(email);
