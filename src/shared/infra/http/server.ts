@@ -1,8 +1,5 @@
-// import 'reflect-metadata';
-// import dotenv from 'dotenv';
+import 'reflect-metadata';
 import app from '@shared/infra/http/app';
-
-// dotenv.config();
 
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () =>
