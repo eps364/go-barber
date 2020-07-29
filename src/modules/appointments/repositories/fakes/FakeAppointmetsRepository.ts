@@ -1,16 +1,16 @@
 import { uuid } from 'uuidv4';
+import { isEqual } from 'date-fns';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppontmentsRepository';
 import Appointments from '@modules/appointments/infra/typeorm/entities/Appointment';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 
-class AppointmetsRepository implements IAppointmentsRepository {
-  private appoitments: Appointments[] = [];
+class AppointmentsRepository implements IAppointmentsRepository {
+  private appointments: Appointments[] = [];
 
   public async findByDate(date: Date): Promise<Appointments | undefined> {
-    const findAppointment = this.appoitments.find(
-      appoitment => appoitment.date === date,
+    const findAppointment = this.appointments.find(appointment =>
+      isEqual(appointment.date, date),
     );
-
     return findAppointment;
   }
 
@@ -22,10 +22,10 @@ class AppointmetsRepository implements IAppointmentsRepository {
 
     Object.assign(appointment, { id: uuid() }, date, provider_id);
 
-    this.appoitments.push(appointment);
+    this.appointments.push(appointment);
 
     return appointment;
   }
 }
 
-export default AppointmetsRepository;
+export default AppointmentsRepository;

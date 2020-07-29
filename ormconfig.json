@@ -7,12 +7,12 @@
  "password": "1234",
  "database": "gobarber",
  "entities": [
- "./dist/modules/**/infra/typeorm/entities/*.js"
+ "./src/modules/**/infra/typeorm/entities/*.js"
  ],
  "migrations": [
- "./dist/shared/infra/typeorm/migrations/*.js"
+ "./src/shared/infra/typeorm/migrations/*.js"
  ],
  "cli": {
- "migrationsDir": "./dist/shared/infra/typeorm/migrations"
+ "migrationsDir": "./src/shared/infra/typeorm/migrations"
  }
 }
