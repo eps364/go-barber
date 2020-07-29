@@ -2,17 +2,18 @@ import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepo
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 
+
 describe('UpdateUserAvatar', () => {
   it('should be able to create a new user', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeStorageProvider = new FakeStorageProvider();
 
     const updateUserAvatar = new UpdateUserAvatarService(
-      fakeUsersRepository,
       fakeStorageProvider,
+      fakeUsersRepository
     );
 
-    const user = await updateUserAvatar.execute({
+    const user = await fakeUsersRepository.create({
       name: 'Emerson Silva',
       email: 'emerson@gmail.com',
       password: '123456',

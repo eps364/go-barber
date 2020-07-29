@@ -5,7 +5,7 @@ import authConfig from '@config/config';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateSessionDTO from '@modules/users/dtos/ICreateSessionDTO';
 import IResponseSessionDTO from '@modules/users/dtos/IResponseSessionDTO';
-import IHashProvider from '@modules/users/providers/HashProvider/models/IhashProvider';
+import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
 
 import AppError from '@shared/errors/AppError';
 

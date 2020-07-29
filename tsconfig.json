@@ -1,26 +1,33 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "baseUrl": "./src",
-    "paths": {
-      "@modules/*": ["modules/*"],
-      "@config/*": ["config/*"],
-      "@shared/*": ["shared/*"]
+    "compilerOptions": {
+      "target": "es2017",                          
+      "module": "commonjs",                     
+      "lib": ["es6"],                             
+      "allowJs": true,                       
+      "outDir": "./dist",                        
+      "rootDir": "./src",                       
+      "removeComments": true,                
+      "typeRoots": [
+        "./node_modules/@types",
+        "./src/@types"
+      ],                          
+      "esModuleInterop": true,                  
+      "resolveJsonModule": true,
+      "experimentalDecorators": true,        
+      "emitDecoratorMetadata": true,         
+      "skipLibCheck": true,                     
+      "forceConsistentCasingInFileNames": true,
+      "baseUrl": "./src",
+      "paths": {
+        "@models/*": ["models/*"],
+        "@views/*": ["views/*"],
+        "@controllers/*": ["controllers/*"],
+        "@shared/*": ["shared/*"],
+        "@config/*": ["config/*"],
+        "@modules/*": ["modules/*"]
+      }
     },
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "forceConsistentCasingInFileNames": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./typings"
-    ],
-   "types":  ["node", "jest"],
-   "skipLibCheck": true,
+    "include": [
+      "src/**/*"
+    ]
   }
-}
