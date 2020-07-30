@@ -20,7 +20,7 @@ describe('CreateUser', () => {
 
     expect(user).toHaveProperty('id');
   });
-  
+
   it('should not be able to create two new user', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
@@ -35,7 +35,7 @@ describe('CreateUser', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       createUserService.execute({
         name: 'Emerson Silva',
         email: 'emerson@gmail.com',

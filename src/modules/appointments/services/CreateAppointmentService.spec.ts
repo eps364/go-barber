@@ -1,4 +1,4 @@
-import {addHours, addDays} from 'date-fns'
+import { addHours, addDays } from 'date-fns';
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmetsRepository';
 import AppError from '@shared/errors/AppError';
 import CreateAppointmentService from './CreateAppointmentService';
@@ -24,7 +24,7 @@ describe('CreateAppointment', () => {
     const createAppointmentService = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
-    const dateAppointment = addHours(addDays(Date.now(), 3),5);
+    const dateAppointment = addHours(addDays(Date.now(), 3), 5);
 
     const appointment = await createAppointmentService.execute({
       date: dateAppointment,
@@ -36,7 +36,7 @@ describe('CreateAppointment', () => {
     expect(
       createAppointmentService.execute({
         date: appointment.date,
-        provider_id: appointment.provider_id
+        provider_id: appointment.provider_id,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

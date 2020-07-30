@@ -42,7 +42,7 @@ describe('AuthenticateUser', () => {
       fakeHashProvider,
     );
 
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'emerson@gmail.com',
         password: '123456',
@@ -70,12 +70,11 @@ describe('AuthenticateUser', () => {
     });
 
     expect(user).toHaveProperty('id');
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'emerson@gmail.com',
         password: 'wrong-password',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
-  
 });
